@@ -2,12 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Code') {
-            steps {
-                git 'https://github.com/riyapathania08/k8s-project.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t riyapathania08/my-app .'
