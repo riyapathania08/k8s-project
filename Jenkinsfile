@@ -4,20 +4,20 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t riyapathania08/my-app .'
+                bat 'docker build -t riyapathania08/my-app .'
             }
         }
 
         stage('Push Image') {
             steps {
-                sh 'docker push riyapathania08/my-app'
+                bat 'docker push riyapathania08/my-app'
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f deployment.yaml'
-                sh 'kubectl apply -f service.yaml'
+                bat 'kubectl apply -f deployment.yaml'
+                bat 'kubectl apply -f service.yaml'
             }
         }
     }
