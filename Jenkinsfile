@@ -4,13 +4,16 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t riyapathania08/my-app .'
+                bat 'docker build -t riyapathania08/my-app:latest .'
             }
         }
 
         stage('Push Image') {
             steps {
-                bat 'docker push riyapathania08/my-app'
+                withCredentials([usernamePassword(credentialsId: 'docker-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                    bat "docker login -u %USER% -p %PASS%"
+                    bat "docker push riyapathania08/my-app:latest"
+                }
             }
         }
 
